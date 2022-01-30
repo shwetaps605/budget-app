@@ -12,8 +12,8 @@ export function useBudgets() {
 
 export const BudgetsProvider = ({ children }) => {
 
-    const [budgets, setBudgets] = useLocalStorage('budgets',[])
-    const [expenses, setExpenses] = useLocalStorage('expenses',[])
+    const [budgets, setBudgets] = useLocalStorage('budgetsdata', [])
+    const [expenses, setExpenses] = useLocalStorage('expenses', [])
 
     //A budget looks like this
     // {
@@ -37,20 +37,20 @@ export const BudgetsProvider = ({ children }) => {
     }
 
     //This function creates a new budget
-    function addBudget(name,max) {
+    function addBudget({ name, max }) {
         setBudgets(prevBudgets => {
-            if (prevBudgets.find(budget => budget.name === name)){
+            if (prevBudgets.find(budget => budget.name === name)) {
                 console.log("This budget already exists")
                 return prevBudgets
             }
-            return [...prevBudgets, {id:uuidV4(),name,max}]
+            return [...prevBudgets, { id: uuidV4(), name, max }]
         })
     }
 
     //This function will create a new expense inside a specific budget
-    function addExpense(budegtId,description,amount) {
+    function addExpense({ budgetId, description, amount }) {
         setExpenses(prevExpenses => {
-            return [...prevExpenses, {id:uuidV4(),budegtId,description,amount}]
+            return [...prevExpenses, { id: uuidV4(), budgetId, description, amount }]
         })
     }
 
