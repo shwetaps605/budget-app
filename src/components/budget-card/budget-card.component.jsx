@@ -4,7 +4,7 @@ import ProgressBar from 'react-bootstrap/ProgressBar'
 import Button from 'react-bootstrap/Button'
 import Stack from 'react-bootstrap/Stack'
 
-const BudgetCard = ({ name, amount, max, gray }) => {
+const BudgetCard = ({ name, amount, max, gray, onAddExpenseClick, hideButtons }) => {
 
     const classNames = []
     if (amount > max) {
@@ -27,23 +27,28 @@ const BudgetCard = ({ name, amount, max, gray }) => {
                     <div className='me-2'>{name}</div>
                     <div className='d-flex align-items-baseline'>
                         {currencyFormatter.format(amount)}
-                        <span className='text-muted fs-6 ms-1'>
+                        {max && <span className='text-muted fs-6 ms-1'>
                             / {currencyFormatter.format(max)}
-                        </span>
+                        </span>}
+
                     </div>
                 </Card.Title>
+                {max &&
+                    <ProgressBar
+                        className='rounded-pill'
+                        variant={getProgressBarVariant(amount, max)}
+                        min={0}
+                        max={max}
+                        now={amount}>
+                    </ProgressBar>}
+                {
+                    !hideButtons &&
+                    <Stack direction='horizontal' gap={3} className='mt-4'>
+                        <Button variant='outline-primary' className='ms-auto' onClick={onAddExpenseClick}>Add Expense</Button>
+                        <Button variant='outline-secondary'>View Expense</Button>
+                    </Stack>
+                }
 
-                <ProgressBar
-                    className='rounded-pill'
-                    variant={getProgressBarVariant(amount, max)}
-                    min={0}
-                    max={max}
-                    now={amount}>
-                </ProgressBar>
-                <Stack direction='horizontal' gap={3} className='mt-4'>
-                    <Button variant='outline-primary' className='ms-auto'>Add Expense</Button>
-                    <Button variant='outline-secondary'>View Expense</Button>
-                </Stack>
             </Card.Body>
         </Card>
     )
