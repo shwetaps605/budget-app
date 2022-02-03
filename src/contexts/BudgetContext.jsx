@@ -58,6 +58,7 @@ export const BudgetsProvider = ({ children }) => {
 
     function deleteBudget(id) {
         setBudgets(prevBudgets => {
+            console.log(id)
             return prevBudgets.filter(budget => budget.id !== id)
         })
 
@@ -65,6 +66,7 @@ export const BudgetsProvider = ({ children }) => {
 
     function deleteExpense(id) {
         setExpenses(prevExpenses => {
+            console.log(id)
             return prevExpenses.filter(expense => expense.id !== id)
         })
     }
