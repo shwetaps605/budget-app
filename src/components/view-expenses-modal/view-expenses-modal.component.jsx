@@ -17,16 +17,23 @@ export default function ViewExpensesModal({ show, handleClose, budgetId }) {
             <Modal.Header>
                 <Stack direction='horizontal' gap={3} className='mb-4'>
                     <Modal.Title className='me-auto'>Expenses</Modal.Title>
-                    <Button variant='danger' onClick={()=>deleteBudget(budgetId)}>Delete</Button>
+                    <Button variant='danger' onClick={() => {
+                        deleteBudget(budgetId)
+                        handleClose()
+                    }}>Delete</Button>
                 </Stack>
             </Modal.Header>
             <Modal.Body>
                 {
                     expenses.map(expense => (
-                        <div key={expense.id} className='mb-3'>
-                            <h3>{expense.description}</h3>
-                            <p>{expense.amount}</p>
-                            <Button variant='danger' onClick={()=>deleteExpense(expense.id)}>Delete</Button>
+                        <div key={expense.id} className='d-flex justify-content-between align-items-baseline fw-normal mb-3'>
+                            <Stack direction='horizontal' gap={5}>
+                                <div>
+                                    <h3>{expense.description}</h3>
+                                    <p>{expense.amount}</p>
+                                </div>
+                                <Button variant='danger' onClick={() => deleteExpense(expense.id)}>Delete</Button>
+                            </Stack>
                         </div>
                     ))
                 }

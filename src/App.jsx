@@ -69,7 +69,8 @@ function App() {
 
                     <UncategorizedBudgetCard
                         onAddExpenseClick={openAddExpenseModal}
-                        onViewExpenseClick={openViewExpenseModal} />
+                        onViewExpenseClick={()=>openViewExpenseModal(UNCATEGORIZED_BUDGET_ID)}
+                    />
 
                     <TotalBudgetCard />
                 </div>
@@ -91,7 +92,7 @@ function App() {
 
             <ViewExpensesModal
                 show={showViewExpensesModal}
-                handleClose={() => setShowAddExpenseModal(false)}
+                handleClose={() => setShowViewExpensesModal(false)}
                 budgetId={viewExpenseModalBudgetId}
             />
 
