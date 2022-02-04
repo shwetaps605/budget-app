@@ -17,7 +17,7 @@ export default function ViewExpensesModal({ show, handleClose, budgetId }) {
             <Modal.Header>
                 <Stack direction='horizontal' gap={3} className='mb-4'>
                     <Modal.Title className='me-auto'>Expenses</Modal.Title>
-                    <Button variant='danger' onClick={deleteBudget(budgetId)}>Delete</Button>
+                    <Button variant='danger' onClick={()=>deleteBudget(budgetId)}>Delete</Button>
                 </Stack>
             </Modal.Header>
             <Modal.Body>
@@ -26,7 +26,7 @@ export default function ViewExpensesModal({ show, handleClose, budgetId }) {
                         <div key={expense.id} className='mb-3'>
                             <h3>{expense.description}</h3>
                             <p>{expense.amount}</p>
-                            <Button variant='danger' onClick={deleteExpense(expense.id)}>Delete</Button>
+                            <Button variant='danger' onClick={()=>deleteExpense(expense.id)}>Delete</Button>
                         </div>
                     ))
                 }
